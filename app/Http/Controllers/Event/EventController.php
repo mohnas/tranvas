@@ -9,7 +9,14 @@ class EventController extends Controller
 {
 	public function home()
 	{
+		//
 		return view('welcome');		# code...
+	}
+
+	public function create()
+	{
+		//
+		return view('create');		# code...
 	}
     //
 }
