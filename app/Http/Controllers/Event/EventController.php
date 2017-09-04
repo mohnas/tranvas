@@ -7,5 +7,9 @@ use App\Http\Controllers\Controller;
 
 class EventController extends Controller
 {
+	public function home()
+	{
+		return view('welcome');		# code...
+	}
     //
 }
