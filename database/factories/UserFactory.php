@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Modules\Event\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +22,20 @@ $factory->define(App\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(Event::class, function (Faker $faker) {
+	$start_date = \Carbon\Carbon::now()->addDays($faker->randomElement([1,2,3,4,5,6,7,8,9]));
+	$end_date = $start_date->copy()->addDays($faker->randomElement([1,2,3,4,5,6,7,8,9]));
+    return [
+        'title' => $faker->sentence(5),
+        'description' => $faker->paragraph(5),
+        'address' => $faker->address,
+        'lat' => $faker->latitude,
+        'long' => $faker->longitude,
+        'start_date' => $start_date->format('Y-m-d'),
+        'end_date' => $end_date->format('Y-m-d'),
+        'user_id' => factory(App\User::class)->create()->id,
     ];
 });
